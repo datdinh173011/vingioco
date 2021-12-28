@@ -54,6 +54,9 @@ export default class Preloader extends Phaser.Scene {
       frameWidth: 32,
       frameHeight: 48,
     })
+
+    this.load.audio('highscore', ['assets/audio/SoundEffects/highscore.ogg', 'assets/audio/SoundEffects/highscore.mp3'])
+    this.load.audio('luke_background','assets/audio/SoundEffects/luke_demo.mp3')
   }
 
   create() {
@@ -88,5 +91,8 @@ export default class Preloader extends Phaser.Scene {
     })
 
     this.scene.run('game')
+
+    const luke_background = this.sound.add('luke_background')
+    luke_background.play()
   }
 }
