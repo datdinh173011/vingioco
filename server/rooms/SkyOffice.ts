@@ -7,7 +7,7 @@ import PlayerUpdateNameCommand from './commands/PlayerUpdateNameCommand'
 import ComputerUpdateArrayCommand from './commands/ComputerUpdateArrayCommand'
 import ChatMessageUpdateCommand from './commands/ChatMessageUpdateCommand'
 
-export class SkyOffice extends Room<OfficeState> {
+export class MetaOffice extends Room<OfficeState> {
   private dispatcher = new Dispatcher(this)
 
   onCreate(options: any) {
