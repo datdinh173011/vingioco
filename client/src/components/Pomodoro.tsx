@@ -35,7 +35,7 @@ export default function Pomodoro() {
 
 	const [openPomodoro, setOpenPomodoro] = useState<boolean>(false)
 	const [mode, setMode] = useState<number>(0)
-	const [modeTime, setModeTime] = useState<Array<number>>([1500, 300, 600])
+	const modeTime:Array<number> = [1500, 300, 600]
 	const [timeLeft, setTimeLeft] = useState<number>(modeTime[mode])
 	const [timer, setTimer] = useState(formatTimer(timeLeft))
 	const [running, setRunning] = useState<boolean>(false)
@@ -67,7 +67,7 @@ export default function Pomodoro() {
 				setTimer(formatTimer(timeLeft));
 			}
 		},
-		[timeLeft, modeTime, mode, running]
+		[timeLeft, mode, running]
 	)
 
 	const handleTogglePomodoro = useCallback(
@@ -92,7 +92,7 @@ export default function Pomodoro() {
 			}
 			setTimeLeft(modeTime[value])
 		},
-		[modeTime, timerId, running, timeLeft, mode]
+		[timerId, running, timeLeft, mode]
 	)
 
 	return (
