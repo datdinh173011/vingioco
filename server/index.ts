@@ -6,7 +6,7 @@ import { monitor } from '@colyseus/monitor'
 
 // import socialRoutes from "@colyseus/social/express"
 
-import { SkyOffice } from './rooms/SkyOffice'
+import { MetaOffice } from './rooms/MetaOffice'
 
 const port = Number(process.env.PORT || 2567)
 const app = express()
@@ -21,7 +21,7 @@ const gameServer = new Server({
 })
 
 // register your room handlers
-gameServer.define('skyoffice', SkyOffice)
+gameServer.define('metaoffice', MetaOffice)
 
 /**
  * Register @colyseus/social routes

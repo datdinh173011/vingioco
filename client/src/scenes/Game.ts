@@ -34,18 +34,43 @@ export default class Game extends Phaser.Scene {
     super('game')
   }
 
+  preload()
+  {
+    this.load.audio('highscore', 'assets/audio/SoundEffects/highscore.mp3')
+    this.load.audio('keyE_audio', 'assets/audio/SoundEffects/keyE_audio.mp3')
+    this.load.audio('keyR_audio', 'assets/audio/SoundEffects/keyR_audio.mp3')
+    this.load.audio('enter_audio', 'assets/audio/SoundEffects/enter_audio.mp3')
+  }
+
   registerKeys() {
+    const keyE_audio = this.sound.add('keyE_audio')
+    const keyR_audio = this.sound.add('keyR_audio')
+    const enter_audio = this.sound.add('enter_audio')
     this.cursors = this.input.keyboard.createCursorKeys()
     // maybe we can have a dedicated method for adding keys if more keys are needed in the future
     this.keyE = this.input.keyboard.addKey('E')
     this.keyR = this.input.keyboard.addKey('R')
     this.input.keyboard.disableGlobalCapture()
     this.input.keyboard.on('keydown-ENTER', (event) => {
+      enter_audio.play()
       store.dispatch(setShowChat(true))
       store.dispatch(setFocused(true))
     })
+
     this.input.keyboard.on('keydown-ESC', (event) => {
       store.dispatch(setShowChat(false))
+    })
+    this.input.keyboard.on('keydown-ESC', (event) => {
+      store.dispatch(setShowChat(false))
+    })
+    this.input.keyboard.on('keydown-E', (event) =>{
+      keyE_audio.play()
+    })
+    this.input.keyboard.on('keydown-R', (event) => {
+      keyR_audio.play()
+    })
+    this.input.keyboard.on('keydown-S', (event) => {
+      this.sound.stopAll()
     })
   }
 

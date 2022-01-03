@@ -131,7 +131,7 @@ export default function LoginDialog() {
 
   return (
     <Wrapper onSubmit={handleSubmit}>
-      <Title>Welcome to SkyOffice</Title>
+      <Title>Welcome to MetaOffice</Title>
       <Content>
         <Left>
           <SubTitle>Select an avatar</SubTitle>

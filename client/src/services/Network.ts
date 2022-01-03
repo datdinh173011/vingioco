@@ -22,7 +22,7 @@ export default class Network {
     const protocol = window.location.protocol.replace('http', 'ws')
     const endpoint =
       process.env.NODE_ENV === 'production'
-        ? `wss://sky-office.herokuapp.com`
+        ? `wss://vingioco-backend.herokuapp.com`
         : `${protocol}//${window.location.hostname}:2567`
     this.client = new Client(endpoint)
 
@@ -32,7 +32,7 @@ export default class Network {
   }
 
   async join() {
-    this.room = await this.client.joinOrCreate('skyoffice')
+    this.room = await this.client.joinOrCreate('metaoffice')
     this.mySessionId = this.room.sessionId
     store.dispatch(setSessionId(this.room.sessionId))
     this.webRTC = new WebRTC(this.mySessionId, this)
