@@ -57,6 +57,8 @@ export default class Preloader extends Phaser.Scene {
 
     this.load.audio('highscore', ['assets/audio/SoundEffects/highscore.ogg', 'assets/audio/SoundEffects/highscore.mp3'])
     this.load.audio('luke_background','assets/audio/SoundEffects/luke_demo.mp3')
+    this.load.audio('morning','assets/audio/SoundEffects/random_background/Morning-Routine.mp3')
+    this.load.audio('happy','assets/audio/SoundEffects/random_background/Happy_African_Village.mp3')
   }
 
   create() {
@@ -92,7 +94,19 @@ export default class Preloader extends Phaser.Scene {
 
     this.scene.run('game')
 
-    const luke_background = this.sound.add('luke_background')
-    luke_background.play()
+    var value = Phaser.Math.Between(1,3);
+
+    if(value === 1){
+      const luke_background = this.sound.add('luke_background')
+      luke_background.play()
+    }
+    if(value === 2){
+      const happy = this.sound.add('happy')
+      happy.play()
+    }
+    if(value ===3){
+      const morning = this.sound.add('morning')
+      morning.play()
+    }
   }
 }

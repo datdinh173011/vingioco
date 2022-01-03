@@ -37,8 +37,8 @@ export default class Game extends Phaser.Scene {
   preload()
   {
     this.load.audio('highscore', 'assets/audio/SoundEffects/highscore.mp3')
-    this.load.audio('keyE_audio', 'assets/audio/SoundEffects/keyE_audio.mp3')
-    this.load.audio('keyR_audio', 'assets/audio/SoundEffects/keyR_audio.mp3')
+    this.load.audio('keyE_audio', 'assets/audio/SoundEffects/keyE_audio_update.mp3')
+    this.load.audio('keyR_audio', 'assets/audio/SoundEffects/aio_aoe.mp3')
     this.load.audio('enter_audio', 'assets/audio/SoundEffects/enter_audio.mp3')
   }
 
@@ -57,9 +57,6 @@ export default class Game extends Phaser.Scene {
       store.dispatch(setFocused(true))
     })
 
-    this.input.keyboard.on('keydown-ESC', (event) => {
-      store.dispatch(setShowChat(false))
-    })
     this.input.keyboard.on('keydown-ESC', (event) => {
       store.dispatch(setShowChat(false))
     })
