@@ -35,7 +35,7 @@ export default function Pomodoro() {
 
 	const [openPomodoro, setOpenPomodoro] = useState<boolean>(false)
 	const [mode, setMode] = useState<number>(0)
-	const [modeTime, setModeTime] = useState<Array<number>>([900, 300, 600])
+	const [modeTime, setModeTime] = useState<Array<number>>([1500, 300, 600])
 	const [timeLeft, setTimeLeft] = useState<number>(modeTime[mode])
 	const [timer, setTimer] = useState(formatTimer(timeLeft))
 	const [running, setRunning] = useState<boolean>(false)
