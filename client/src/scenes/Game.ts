@@ -37,9 +37,12 @@ export default class Game extends Phaser.Scene {
   preload()
   {
     this.load.audio('highscore', 'assets/audio/SoundEffects/highscore.mp3')
-    this.load.audio('keyE_audio', 'assets/audio/SoundEffects/keyE_audio.mp3')
-    this.load.audio('keyR_audio', 'assets/audio/SoundEffects/keyR_audio.mp3')
+    this.load.audio('keyE_audio', 'assets/audio/SoundEffects/keyE_audio_update.mp3')
+    this.load.audio('keyR_audio', 'assets/audio/SoundEffects/aio_aoe.mp3')
     this.load.audio('enter_audio', 'assets/audio/SoundEffects/enter_audio.mp3')
+    this.load.audio('luke_background','assets/audio/SoundEffects/luke_demo.mp3')
+    this.load.audio('morning','assets/audio/SoundEffects/random_background/Morning-Routine.mp3')
+    this.load.audio('happy','assets/audio/SoundEffects/random_background/Happy_African_Village.mp3')
   }
 
   registerKeys() {
@@ -56,10 +59,7 @@ export default class Game extends Phaser.Scene {
       store.dispatch(setShowChat(true))
       store.dispatch(setFocused(true))
     })
-
-    this.input.keyboard.on('keydown-ESC', (event) => {
-      store.dispatch(setShowChat(false))
-    })
+    
     this.input.keyboard.on('keydown-ESC', (event) => {
       store.dispatch(setShowChat(false))
     })
@@ -69,7 +69,24 @@ export default class Game extends Phaser.Scene {
     this.input.keyboard.on('keydown-R', (event) => {
       keyR_audio.play()
     })
-    this.input.keyboard.on('keydown-S', (event) => {
+    this.input.keyboard.on('keydown-Q', (event) => {
+      this.sound.stopAll()
+      var value = Phaser.Math.Between(1,3);
+      if(value === 1){
+        const luke_background = this.sound.add('luke_background')
+        luke_background.play()
+      }
+      if(value === 2){
+        const happy = this.sound.add('happy')
+        happy.play()
+      }
+      if(value ===3){
+        const morning = this.sound.add('morning')
+        morning.play()
+      }
+    })
+
+    this.input.keyboard.on('keydown-W', (event) => {
       this.sound.stopAll()
     })
   }
