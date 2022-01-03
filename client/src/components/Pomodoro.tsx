@@ -38,9 +38,11 @@ export default function Pomodoro() {
 	const [modeTime, setModeTime] = useState<Array<number>>([900, 300, 600])
 	const [timeLeft, setTimeLeft] = useState<number>(modeTime[mode])
 	const [timer, setTimer] = useState(formatTimer(timeLeft))
+	const [running, setRunning] = useState<boolean>(false)
 	const timerId: { current: any } = useRef(null);
 
 	const handleStart = () => {
+		setRunning(true)
 		timerId.current = setInterval(
 			() => {
 				setTimeLeft(prev => prev - 1);
@@ -49,18 +51,23 @@ export default function Pomodoro() {
 		)
 	}
 
+	const handleStop = () => {
+		setRunning(false)
+		clearInterval(timerId.current)
+	}
+
 	useEffect(
 		() => {
 			if (timeLeft < 0) {
 				clearInterval(timerId.current)
-				timerId.current = null
 				setTimeLeft(modeTime[mode])
+				setRunning(false)
 				alert("Time's up!")
 			} else {
 				setTimer(formatTimer(timeLeft));
 			}
 		},
-		[timeLeft, modeTime, mode]
+		[timeLeft, modeTime, mode, running]
 	)
 
 	const handleTogglePomodoro = useCallback(
@@ -72,14 +79,20 @@ export default function Pomodoro() {
 
 	const handleChangeMode = useCallback(
 		(event: object, value: number) => {
+			if (running || timeLeft < modeTime[mode]) {
+				let res = window.confirm("Are you sure about that?")
+				if (!res) {
+					return
+				}
+			}
 			setMode(value)
-			if (timerId.current != null) {
+			if (running) {
 				clearInterval(timerId.current)
-				timerId.current = null;
+				setRunning(false)
 			}
 			setTimeLeft(modeTime[value])
 		},
-		[modeTime, timerId]
+		[modeTime, timerId, running, timeLeft, mode]
 	)
 
 	return (
@@ -142,17 +155,28 @@ export default function Pomodoro() {
 											width: "100%"
 										}}
 									>
-										<Button
-											color="primary"
-											sx={{
-												display: "flex",
-												margin: "0 auto"
-											}}
-											onClick={handleStart}
-											disabled={timerId.current != null}
-										>
-											START
-										</Button>
+										{running ?
+											<Button
+												color="secondary"
+												sx={{
+													display: "flex",
+													margin: "0 auto"
+												}}
+												onClick={handleStop}
+											>
+												STOP
+											</Button>
+											: <Button
+												color="primary"
+												sx={{
+													display: "flex",
+													margin: "0 auto"
+												}}
+												onClick={handleStart}
+											>
+												START
+											</Button>
+										}
 									</div>
 								</div>
 							</CardContent>
