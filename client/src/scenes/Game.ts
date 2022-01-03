@@ -70,6 +70,7 @@ export default class Game extends Phaser.Scene {
       keyR_audio.play()
     })
     this.input.keyboard.on('keydown-Q', (event) => {
+      this.sound.stopAll()
       var value = Phaser.Math.Between(1,3);
       if(value === 1){
         const luke_background = this.sound.add('luke_background')
@@ -85,7 +86,7 @@ export default class Game extends Phaser.Scene {
       }
     })
 
-    this.input.keyboard.on('keydown-S', (event) => {
+    this.input.keyboard.on('keydown-W', (event) => {
       this.sound.stopAll()
     })
   }
